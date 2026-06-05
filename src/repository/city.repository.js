@@ -1,0 +1,54 @@
+
+const {city : City} = require('../models')
+
+// here this export means objectProperty : localVariableName
+
+class CityRepository{
+    async createCity({ name }){
+        try {
+            const createdcity = await City.create( {Name : name} )
+            return createdcity;
+        } catch (error) {
+            throw(error);
+        }
+    }
+    async deleteCity({ cityId }){
+        try {
+            await City.destroy({
+                where:{
+                    id : cityId
+                }
+            })
+            return true;
+        } catch (error) {
+            throw(error);
+        }
+    }
+    async updateCity(cityId, data){
+        try {
+            const updatedcity = await City.update(data , {
+                where:{
+                    id : cityId
+                }
+            });
+            return updatedcity;
+        } catch (error) {
+            throw(error);
+        }
+    }
+    async getCity(cityId){
+        try {
+            // const city = await city.findByPk( {name : name} )
+            const gotcity = await City.findOne({ 
+                where:{
+                    id:cityId
+                }
+             })
+            return gotcity;
+        } catch (error) {
+            throw(error);
+        }
+    }
+}
+
+module.exports = CityRepository

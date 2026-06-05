@@ -1,0 +1,13 @@
+/ 
+    -src/
+        index.js[server]
+        models/
+        middlewares/
+        controllers/
+        services/
+        utils/
+        config/
+        repository/
+    -tests/[later]
+    -static/
+    -temp/
