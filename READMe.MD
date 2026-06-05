@@ -1,4 +1,4 @@
-# Welcome to Flights Service
+# Welcome to Aero
 
 ## Project Setup
 - clone the project on your local
