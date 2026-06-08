@@ -30,7 +30,7 @@ const createCity = async (req,res)=>{
 // router - /city/:id
 const deleteCity = async (req,res)=>{
     try {
-        const city = await cityService.get(req.params.id)
+        const city = await cityService.delete(req.params.id)
         return res.status(201).json({
             data : city,
             message : "City deleted successfully",
@@ -54,7 +54,7 @@ const deleteCity = async (req,res)=>{
 // router - /city/:id
 const updateCity = async (req,res)=>{
     try {
-        const city = await cityService.update(req.params.id)
+        const city = await cityService.update(req.params.id, req.body)
         return res.status(201).json({
             data : city,
             message : "City updated successfully",
