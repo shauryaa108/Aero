@@ -1,5 +1,6 @@
 const express = require("express")
 const {PORT} = require('./config/envconfig.config.js')
+const router = require('../src/routes/index.js')
 
 const SetupServer = async ()=>{
     const app = express()
@@ -8,5 +9,7 @@ const SetupServer = async ()=>{
     })
     
 }
+
+ap.use('/', router)
 
 SetupServer()
