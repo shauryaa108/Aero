@@ -1,4 +1,4 @@
-const {CityService} = require('../services/city.service')
+const CityService = require('../services/city.service')
 
 const cityService = new CityService()
 // it will hvae all the functions executed by the router means we will hvae certain routes, those routes will hit these 

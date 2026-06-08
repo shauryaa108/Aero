@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
-const cityrouter = require('./city.routes.js')
+const cityRouter = require('./city.routes.js')
 
-router.use('/city', cityrouter)
+router.use('/city', cityRouter)
 
 module.exports = router

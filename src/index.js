@@ -7,9 +7,10 @@ const SetupServer = async ()=>{
     app.listen(process.env.PORT , ()=>{
         console.log("app is listening on port ",PORT)
     })
-    
+    app.use(express.json())
+    app.use(express.urlencoded({extended:true}))
+    app.use('/', router)
 }
 
-ap.use('/', router)
 
 SetupServer()

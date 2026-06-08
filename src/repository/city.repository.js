@@ -4,14 +4,17 @@ const {city : City} = require('../models')
 // here this export means objectProperty : localVariableName
 
 class CityRepository{
-    async createCity({ name }){
-        try {
-            const createdcity = await City.create( {Name : name} )
-            return createdcity;
-        } catch (error) {
-            throw(error);
-        }
+    async createCity({Name}){
+    try {
+        const createdcity = await City.create({
+            Name: Name
+        });
+
+        return createdcity;
+    } catch (error) {
+        throw error;
     }
+}
     async deleteCity({ cityId }){
         try {
             await City.destroy({
@@ -38,7 +41,7 @@ class CityRepository{
     }
     async getCity(cityId){
         try {
-            // const city = await city.findByPk( {name : name} )
+            // const city = await city.findByPk(cityId)
             const gotcity = await City.findOne({ 
                 where:{
                     id:cityId
