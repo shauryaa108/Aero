@@ -95,9 +95,31 @@ const getCity = async (req,res)=>{
     }
 }
 
+// routes -  /cities/
+const getAllCities = async (req,res)=>{
+    try {
+        const cities = await cityService.getAll()
+        return res.status(201).json({
+            data : cities,
+            message : "cities fetched successfully",
+            success: true,
+            err : {}
+        })
+    } catch (error) {
+        console.log("couldn't fetch the cities through controllers");
+        return res.status(500).json({
+            data:{},
+            message : "City fetch unsuccessful",
+            success: false,
+            err : error
+        })
+    }
+}
+
 module.exports = {
     getCity,
     updateCity,
     deleteCity,
-    createCity
+    createCity,
+    getAllCities
 }
