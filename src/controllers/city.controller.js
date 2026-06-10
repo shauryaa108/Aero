@@ -98,7 +98,7 @@ const getCity = async (req,res)=>{
 // routes -  /cities/
 const getAllCities = async (req,res)=>{
     try {
-        const cities = await cityService.getAll()
+        const cities = await cityService.getAll(req.query)
         return res.status(201).json({
             data : cities,
             message : "cities fetched successfully",

@@ -1,4 +1,4 @@
-
+const { Op } = require('sequelize')
 const {city : City} = require('../models')
 
 // here this export means objectProperty : localVariableName
@@ -52,10 +52,21 @@ class CityRepository{
             throw(error);
         }
     }
-    async getCities(){
+    async getCities(filter){
         try {
-            // const city = await city.findByPk(cityId)
-            const gotcities = await City.findAll({})
+            // now we need to know how to query using the filter
+            // filters are of type - 1. starting character match 
+            if(filter.Name){
+                const gotcities = await City.findAll({
+                where : {
+                    name:{
+                        [Op.startsWith] : filter.Name //working
+                    }
+                }
+            })
+            return gotcities
+            }
+            const gotcities = await City.findAll()
             return gotcities;
         } catch (error) {
             throw(error);
