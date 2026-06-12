@@ -33,7 +33,7 @@ module.exports = {
       },
       {
         name: 'Indira Gandhi International Airport',
-        cityId: 2,
+        cityId: 3,
         createdAt: new Date(),
         updatedAt: new Date()
       }
