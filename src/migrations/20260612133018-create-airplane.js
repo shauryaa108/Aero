@@ -11,6 +11,7 @@ module.exports = {
       },
       modelNumber: {
         type: Sequelize.STRING,
+        unique:true,
         allowNull:false
       },
       capacity: {

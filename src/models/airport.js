@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      this.belongsTo(models.city , {
+      this.belongsTo(models.City , {
         foreignKey:'cityId',
         onDelete:'CASCADE'
       }) // use of model name here
@@ -32,7 +32,8 @@ module.exports = (sequelize, DataTypes) => {
   Airport.init({
     Name: {
       type : DataTypes.STRING,
-      allowNull:false
+      allowNull:false,
+      unique:true
     },
     address: DataTypes.STRING,
     cityId: {

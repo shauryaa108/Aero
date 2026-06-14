@@ -11,16 +11,18 @@ module.exports = {
       },
       Name: {
         type: Sequelize.STRING,
-        allowNull:false
+        allowNull:false,
+        unique:true
       },
       address: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       cityId: {
         type: Sequelize.INTEGER,
         onDelete :'CASCADE',
+        onUpdate:'CASCADE',
         references:{
-          model:'cities', // use of table name here
+          model:'Cities', // use of table name here
           key:'id',
         },
         allowNull:false

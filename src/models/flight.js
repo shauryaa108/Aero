@@ -29,13 +29,17 @@ module.exports = (sequelize, DataTypes) => {
         onDelete:'CASCADE',
         onUpdate:'CASCADE'
       })
+      this.hasMany(models.Booking,{
+        foreignKey:'flightId',
+        onDelete:'CASCADE',
+        onUpdate:'CASCADE'
+      })
     }
   }
   Flight.init({
     flightNumber: {
       type:DataTypes.STRING,
-      allowNull: false,
-      unique: true
+      allowNull: false
     },
     airplaneId: {
       type: DataTypes.INTEGER,
@@ -61,8 +65,15 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    boardingGate: DataTypes.STRING,
+    boardingGate: {
+      type:DataTypes.STRING,
+      allowNull:false
+    },
     totalSeats: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    availableSeats: {
       type: DataTypes.INTEGER,
       allowNull: false
     }
