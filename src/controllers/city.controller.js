@@ -1,120 +1,76 @@
-const CityService = require('../services/city.service')
+const CityService = require('../services/city.service');
+const ApiResponse = require('../middlewares/apiResponse.middleware');
+const asyncHandler = require('../utils/asyncHandler.utils');
 
-const cityService = new CityService()
-// it will hvae all the functions executed by the router means we will hvae certain routes, those routes will hit these 
-// functions and we will be having the output through these functions
-// we only need to write the functions here as we don't need to add any class
-// we can also make sure that there is no direct interaction with db so we remove the repository import
+const cityService = new CityService();
 
-// router - /city/
-const createCity = async (req,res)=>{
-    try {
-        const city = await cityService.create(req.body)
-        return res.status(201).json({
-            data : city,
-            message : "City created successfully",
-            success: true,
-            err : {}
-        })
-    } catch (error) {
-        console.log("couldn't create the city through controllers");
-        return res.status(500).json({
-            data:{},
-            message : "City create unsuccessful",
-            success: false,
-            err : error
-        })
-    }
-}
+// POST /city
+const createCity = asyncHandler(async (req, res) => {
+    const city = await cityService.create(req.body);
 
-// router - /city/:id
-const deleteCity = async (req,res)=>{
-    try {
-        const city = await cityService.delete(req.params.id)
-        return res.status(201).json({
-            data : city,
-            message : "City deleted successfully",
-            success: true,
-            err : {}
-        })
-    } catch (error) {
-        console.log("couldn't delete the city through controllers");
-        return res.status(500).json({
-            data:{},
-            message : "City delete unsuccessful",
-            success: false,
-            err : error
-        })
-    }
-}
+    return res.status(201).json(
+        new ApiResponse(
+            201,
+            city,
+            "City created successfully"
+        )
+    );
+});
 
+// DELETE /city/:id
+const deleteCity = asyncHandler(async (req, res) => {
+    const city = await cityService.delete(req.params.id);
 
+    return res.status(200).json(
+        new ApiResponse(
+            200,
+            city,
+            "City deleted successfully"
+        )
+    );
+});
 
+// PATCH /city/:id
+const updateCity = asyncHandler(async (req, res) => {
+    const city = await cityService.update(
+        req.params.id,
+        req.body
+    );
 
-// router - /city/:id
-const updateCity = async (req,res)=>{
-    try {
-        const city = await cityService.update(req.params.id, req.body)
-        return res.status(201).json({
-            data : city,
-            message : "City updated successfully",
-            success: true,
-            err : {}
-        })
-    } catch (error) {
-        console.log("couldn't update the city through controllers");
-        return res.status(500).json({
-            data:{},
-            message : "City update unsuccessful",
-            success: false,
-            err : error
-        })
-    }
-}
+    return res.status(200).json(
+        new ApiResponse(
+            200,
+            city,
+            "City updated successfully"
+        )
+    );
+});
 
+// GET /city/:id
+const getCity = asyncHandler(async (req, res) => {
+    const city = await cityService.get(req.params.id);
 
+    return res.status(200).json(
+        new ApiResponse(
+            200,
+            city,
+            "City fetched successfully"
+        )
+    );
+});
 
-// router - /city/:id
-const getCity = async (req,res)=>{
-    try {
-        const city = await cityService.get(req.params.id)
-        return res.status(201).json({
-            data : city,
-            message : "City fetched successfully",
-            success: true,
-            err : {}
-        })
-    } catch (error) {
-        console.log("couldn't fetch the city through controllers");
-        return res.status(500).json({
-            data:{},
-            message : "City fetch unsuccessful",
-            success: false,
-            err : error
-        })
-    }
-}
+// GET /cities
+const getAllCities = asyncHandler(async (req, res) => {
+    const cities = await cityService.getAll(req.query);
 
-// routes -  /cities/
-const getAllCities = async (req,res)=>{
-    try {
-        const cities = await cityService.getAll(req.query)
-        return res.status(201).json({
-            data : cities,
-            message : "cities fetched successfully",
-            success: true,
-            err : {}
-        })
-    } catch (error) {
-        console.log("couldn't fetch the cities through controllers");
-        return res.status(500).json({
-            data:{},
-            message : "City fetch unsuccessful",
-            success: false,
-            err : error
-        })
-    }
-}
+    return res.status(200).json(
+        new ApiResponse(
+            200,
+            cities,
+            "Cities fetched successfully"
+        )
+    );
+});
 
 module.exports = {
     getCity,
@@ -122,4 +78,4 @@ module.exports = {
     deleteCity,
     createCity,
     getAllCities
-}
+};

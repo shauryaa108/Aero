@@ -5,8 +5,13 @@ const {Airport} = require('./models')
 const {city} = require('./models')
 const {Flight} = require('./models')
 const db = require('./models')
+const errorHandler = require('./middlewares/errorHandler.middleware.js')
 const SetupServer = async ()=>{
     const app = express()
+    app.use(express.json())
+    app.use(express.urlencoded({extended:true}))
+    app.use(errorHandler)
+    app.use('/', router)
     app.listen(PORT , async ()=>{
         console.log("app is listening on port ",PORT)
         // const data = await Airport.findAll({
@@ -30,22 +35,7 @@ const SetupServer = async ()=>{
         // const airportsdata = await citydata.getAirports() // this function was created by sequelize for us using the association we defined
         // console.log(airportsdata)
 
-        const flights = await Flight.findAll({
-                include: [
-                    {
-                        model: Airport,
-                        as: 'departureAirport'
-                    },
-                    {
-                        model: Airport,
-                        as: 'destinationAirport'
-                    }
-                ]
-            });
     })
-    app.use(express.json())
-    app.use(express.urlencoded({extended:true}))
-    app.use('/', router)
 }
 
 
