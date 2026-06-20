@@ -34,7 +34,7 @@ const SetupServer = async ()=>{
         // })
         // const airportsdata = await citydata.getAirports() // this function was created by sequelize for us using the association we defined
         // console.log(airportsdata)
-
+        
     })
 }
 
